@@ -1,1 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global styles for elementar-rt-admin.
+   The elementar-rt default theme wires Angular Material 3 theming, Tailwind v4,
+   the full CSS-variable design-token set, and dark mode (via the `html.dark` class). */
+@use '@elementar-rt/components/styles/themes/default';
+
+/* Ensure Tailwind scans this app's own templates for utility classes. */
+@source './app';
+@source './index.html';
