@@ -1,0 +1,126 @@
+<div class="flex h-16 items-center gap-2 px-3 sm:px-4">
+  <!-- Sidebar toggle (desktop: compact; mobile: open drawer) -->
+  <button matIconButton class="hidden lg:inline-flex" (click)="store.toggleSidebarCompact()" matTooltip="Toggle sidebar" aria-label="Toggle sidebar">
+    <iconify-icon icon="solar:hamburger-menu-linear" width="22" height="22"></iconify-icon>
+  </button>
+  <button matIconButton class="inline-flex lg:hidden" (click)="store.setMobileSidebarOpen(true)" aria-label="Open menu">
+    <iconify-icon icon="solar:hamburger-menu-linear" width="22" height="22"></iconify-icon>
+  </button>
+
+  <!-- Breadcrumbs -->
+  <nav class="hidden min-w-0 items-center gap-1.5 text-sm sm:flex" aria-label="Breadcrumb">
+    @for (crumb of breadcrumbs(); track crumb.link; let last = $last) {
+      @if (last) {
+        <span class="truncate font-medium text-on-surface" aria-current="page">{{ crumb.label }}</span>
+      } @else {
+        <a [routerLink]="crumb.link" class="truncate text-on-surface-variant hover:text-primary">{{ crumb.label }}</a>
+        <iconify-icon icon="solar:alt-arrow-right-linear" width="14" height="14" class="text-on-surface-variant/50"></iconify-icon>
+      }
+    }
+  </nav>
+
+  <div class="flex-1"></div>
+
+  <!-- Actions -->
+  <button matIconButton matTooltip="Search" aria-label="Search">
+    <iconify-icon icon="solar:magnifer-linear" width="20" height="20"></iconify-icon>
+  </button>
+
+  <!-- Apps -->
+  <button matIconButton [matMenuTriggerFor]="appsMenu" matTooltip="Apps" aria-label="Apps">
+    <iconify-icon icon="solar:widget-add-linear" width="20" height="20"></iconify-icon>
+  </button>
+  <mat-menu #appsMenu="matMenu" class="!max-w-none">
+    <div class="w-72 p-2">
+      <p class="px-2 py-1.5 text-xs font-semibold uppercase tracking-wide text-on-surface-variant">Applications</p>
+      <div class="grid grid-cols-3 gap-1">
+        @for (app of apps; track app.link) {
+          <a [routerLink]="app.link" class="flex flex-col items-center gap-1.5 rounded-xl p-3 text-center hover:bg-surface-container" mat-menu-item>
+            <iconify-icon [icon]="app.icon" width="26" height="26" class="text-primary"></iconify-icon>
+            <span class="text-xs text-on-surface">{{ app.label }}</span>
+          </a>
+        }
+      </div>
+    </div>
+  </mat-menu>
+
+  <!-- Notifications -->
+  <button matIconButton [matMenuTriggerFor]="notifMenu" matTooltip="Notifications" aria-label="Notifications"
+          [matBadge]="store.unreadCount()" [matBadgeHidden]="store.unreadCount() === 0" matBadgeColor="warn" matBadgeSize="small">
+    <iconify-icon icon="solar:bell-linear" width="20" height="20"></iconify-icon>
+  </button>
+  <mat-menu #notifMenu="matMenu" class="!max-w-none">
+    <div class="w-80" (click)="$event.stopPropagation()">
+      <div class="flex items-center justify-between px-4 py-3">
+        <span class="text-sm font-semibold text-on-surface">Notifications</span>
+        <button class="text-xs text-primary hover:underline" (click)="store.markAllRead()">Mark all read</button>
+      </div>
+      <mat-divider />
+      <div class="max-h-96 overflow-y-auto py-1">
+        @for (n of store.notifications(); track n.id) {
+          <button mat-menu-item class="!h-auto !whitespace-normal !py-2.5" (click)="store.markRead(n.id)">
+            <div class="flex items-start gap-3">
+              <iconify-icon [icon]="n.icon" width="22" height="22" class="mt-0.5 shrink-0 text-primary"></iconify-icon>
+              <div class="min-w-0 flex-1">
+                <p class="flex items-center gap-2 text-sm font-medium text-on-surface">
+                  {{ n.title }}
+                  @if (!n.read) { <span class="size-1.5 shrink-0 rounded-full bg-error"></span> }
+                </p>
+                <p class="truncate text-xs text-on-surface-variant">{{ n.body }}</p>
+                <p class="mt-0.5 text-[11px] text-on-surface-variant/70">{{ n.time | date: 'short' }}</p>
+              </div>
+            </div>
+          </button>
+        }
+      </div>
+    </div>
+  </mat-menu>
+
+  <!-- Chat drawer (wired in a later phase) -->
+  <button matIconButton matTooltip="Chat" aria-label="Chat" routerLink="/applications/messenger">
+    <iconify-icon icon="solar:chat-round-line-linear" width="20" height="20"></iconify-icon>
+  </button>
+
+  <!-- Color scheme -->
+  <button matIconButton (click)="toggleScheme()" [matTooltip]="isDark() ? 'Light mode' : 'Dark mode'" aria-label="Toggle color scheme">
+    @if (isDark()) {
+      <iconify-icon icon="solar:sun-bold" width="20" height="20"></iconify-icon>
+    } @else {
+      <iconify-icon icon="solar:moon-bold" width="20" height="20"></iconify-icon>
+    }
+  </button>
+
+  <!-- Avatar -->
+  <button class="ml-1 rounded-full" [matMenuTriggerFor]="userMenu" aria-label="Account">
+    <img [src]="userAvatar" alt="Account" class="size-9 rounded-full ring-2 ring-outline-variant" />
+  </button>
+  <mat-menu #userMenu="matMenu" class="!max-w-none">
+    <div class="w-60">
+      <div class="flex items-center gap-3 px-4 py-3">
+        <img [src]="userAvatar" alt="" class="size-10 rounded-full" />
+        <div class="min-w-0">
+          <p class="truncate text-sm font-semibold text-on-surface">Rostyslav Tulika</p>
+          <p class="truncate text-xs text-on-surface-variant">rostik.tulika&#64;gmail.com</p>
+        </div>
+      </div>
+      <mat-divider />
+      <a mat-menu-item routerLink="/user-profile/overview">
+        <iconify-icon icon="solar:user-circle-linear" width="20" height="20" class="mr-3"></iconify-icon>
+        My Profile
+      </a>
+      <a mat-menu-item routerLink="/account/settings/my-profile">
+        <iconify-icon icon="solar:settings-linear" width="20" height="20" class="mr-3"></iconify-icon>
+        Settings
+      </a>
+      <a mat-menu-item routerLink="/account/settings/billing">
+        <iconify-icon icon="solar:card-linear" width="20" height="20" class="mr-3"></iconify-icon>
+        Billing
+      </a>
+      <mat-divider />
+      <a mat-menu-item routerLink="/auth/sign-in">
+        <iconify-icon icon="solar:logout-3-linear" width="20" height="20" class="mr-3"></iconify-icon>
+        Sign out
+      </a>
+    </div>
+  </mat-menu>
+</div>

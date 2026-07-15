@@ -1,0 +1,56 @@
+<div class="flex h-screen flex-col overflow-hidden bg-background text-on-background">
+  <!-- Topbar: announcement + incidents -->
+  @if (store.hasAnnouncement()) {
+    @let a = store.announcement();
+    <div class="flex shrink-0 items-center justify-center gap-3 bg-primary px-4 py-1.5 text-sm text-on-primary">
+      <iconify-icon icon="solar:confetti-bold-duotone" width="18" height="18"></iconify-icon>
+      <span>{{ a?.message }}</span>
+      @if (a?.link) {
+        <a [href]="a?.link" class="font-semibold underline underline-offset-2">{{ a?.linkLabel }}</a>
+      }
+      <button class="ml-2 opacity-80 hover:opacity-100" (click)="store.dismissAnnouncement()" aria-label="Dismiss announcement">
+        <iconify-icon icon="solar:close-circle-linear" width="18" height="18"></iconify-icon>
+      </button>
+    </div>
+  }
+  @for (incident of store.incidents(); track incident.id) {
+    <div class="flex shrink-0 items-center gap-3 px-4 py-1.5 text-sm"
+         [class.bg-error]="incident.severity === 'critical'"
+         [class.text-on-error]="incident.severity === 'critical'"
+         [class.bg-orange-container]="incident.severity === 'warning'"
+         [class.text-on-orange-container]="incident.severity === 'warning'"
+         [class.bg-blue-container]="incident.severity === 'info'"
+         [class.text-on-blue-container]="incident.severity === 'info'">
+      <iconify-icon icon="solar:danger-triangle-bold-duotone" width="18" height="18"></iconify-icon>
+      <span class="flex-1">{{ incident.message }}</span>
+      <button class="opacity-80 hover:opacity-100" (click)="store.dismissIncident(incident.id)" aria-label="Dismiss">
+        <iconify-icon icon="solar:close-circle-linear" width="18" height="18"></iconify-icon>
+      </button>
+    </div>
+  }
+
+  <div class="flex flex-1 overflow-hidden">
+    <!-- Desktop sidebar -->
+    <aside class="hidden shrink-0 border-r border-outline-variant lg:block">
+      <app-sidebar />
+    </aside>
+
+    <!-- Mobile sidebar drawer -->
+    @if (store.mobileSidebarOpen()) {
+      <div class="fixed inset-0 z-40 bg-scrim/50 lg:hidden" (click)="store.setMobileSidebarOpen(false)" aria-hidden="true"></div>
+      <aside class="fixed inset-y-0 left-0 z-50 border-r border-outline-variant shadow-xl lg:hidden">
+        <app-sidebar />
+      </aside>
+    }
+
+    <!-- Main -->
+    <div class="flex flex-1 flex-col overflow-hidden">
+      <header class="shrink-0 border-b border-outline-variant bg-surface">
+        <app-header />
+      </header>
+      <main class="emr-scroll-lg flex-1 overflow-y-auto">
+        <router-outlet />
+      </main>
+    </div>
+  </div>
+</div>
