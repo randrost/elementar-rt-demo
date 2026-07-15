@@ -1,0 +1,179 @@
+<div class="flex flex-col gap-3">
+  <!-- Toolbar -->
+  @if (enableSearch() || selectedCount() > 0) {
+    <div class="flex items-center gap-3">
+      @if (enableSearch()) {
+        <div class="relative max-w-xs flex-1">
+          <iconify-icon icon="solar:magnifer-linear" width="18" height="18"
+            class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"></iconify-icon>
+          <input
+            type="search"
+            [ngModel]="globalFilter()"
+            (ngModelChange)="globalFilter.set($event)"
+            placeholder="Search…"
+            aria-label="Search table"
+            class="w-full rounded-xl border border-outline-variant bg-surface py-2 pl-10 pr-3 text-sm text-on-surface outline-none focus:border-primary" />
+        </div>
+      }
+      @if (selectedCount() > 0) {
+        <span class="text-sm text-on-surface-variant">{{ selectedCount() }} selected</span>
+      }
+    </div>
+  }
+
+  <!-- Table -->
+  <div class="overflow-x-auto rounded-2xl border border-outline-variant">
+    <table class="w-full border-collapse text-sm">
+      <thead>
+        <tr class="border-b border-outline-variant bg-surface-container-low text-left">
+          @if (enableSelection()) {
+            <th class="w-10 px-4 py-3">
+              <mat-checkbox
+                [checked]="table.getIsAllRowsSelected()"
+                [indeterminate]="table.getIsSomeRowsSelected()"
+                (change)="table.toggleAllRowsSelected()"
+                aria-label="Select all rows" />
+            </th>
+          }
+          @for (col of columns(); track col.id) {
+            <th class="px-4 py-3 font-semibold text-on-surface-variant"
+                [style.text-align]="col.align || 'left'" [style.width]="col.width">
+              @if ((col.sortable ?? true) && col.type !== 'actions') {
+                <button class="inline-flex items-center gap-1.5 hover:text-on-surface"
+                        (click)="table.getColumn(col.id)?.toggleSorting()">
+                  {{ col.header }}
+                  <iconify-icon [icon]="sortIcon(col.id)" width="14" height="14" class="text-on-surface-variant/60"></iconify-icon>
+                </button>
+              } @else {
+                {{ col.header }}
+              }
+            </th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @if (loading()) {
+          @for (r of [1,2,3,4,5]; track r) {
+            <tr class="border-b border-outline-variant last:border-0">
+              @if (enableSelection()) { <td class="px-4 py-3.5"></td> }
+              @for (col of columns(); track col.id) {
+                <td class="px-4 py-3.5"><div class="h-4 w-24 animate-pulse rounded bg-surface-container-highest"></div></td>
+              }
+            </tr>
+          }
+        } @else if (table.getRowModel().rows.length === 0) {
+          <tr>
+            <td [attr.colspan]="columns().length + (enableSelection() ? 1 : 0)" class="px-4 py-16 text-center">
+              <div class="flex flex-col items-center gap-2 text-on-surface-variant">
+                <iconify-icon icon="solar:inbox-linear" width="40" height="40"></iconify-icon>
+                <span class="text-sm">{{ emptyMessage() }}</span>
+              </div>
+            </td>
+          </tr>
+        } @else {
+          @for (row of table.getRowModel().rows; track row.id) {
+            <tr class="border-b border-outline-variant transition-colors last:border-0 hover:bg-surface-container-low"
+                [class.bg-surface-container-low]="row.getIsSelected()">
+              @if (enableSelection()) {
+                <td class="px-4 py-3">
+                  <mat-checkbox [checked]="row.getIsSelected()" (change)="row.toggleSelected()" aria-label="Select row" />
+                </td>
+              }
+              @for (col of columns(); track col.id) {
+                @let v = value(col, row.original);
+                <td class="px-4 py-3 text-on-surface" [style.text-align]="col.align || 'left'">
+                  @switch (col.type) {
+                    @case ('user') {
+                      @let u = asUser(v);
+                      <div class="flex items-center gap-3">
+                        <img [src]="avatar(u.avatarSeed)" alt="" class="size-9 shrink-0 rounded-full" />
+                        <div class="min-w-0">
+                          <p class="truncate font-medium">{{ u.name }}</p>
+                          @if (u.secondary) { <p class="truncate text-xs text-on-surface-variant">{{ u.secondary }}</p> }
+                        </div>
+                      </div>
+                    }
+                    @case ('status') {
+                      @let s = asStatus(v);
+                      <span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium" [class]="statusClasses(s.tone)">
+                        <span class="size-1.5 rounded-full bg-current opacity-70"></span>{{ s.label }}
+                      </span>
+                    }
+                    @case ('currency') { <span class="font-medium tabular-nums">{{ currency(v, col.currency) }}</span> }
+                    @case ('date') { <span class="text-on-surface-variant">{{ asDate(v) | date: 'mediumDate' }}</span> }
+                    @case ('progress') {
+                      <div class="flex items-center gap-2">
+                        <div class="h-1.5 w-24 overflow-hidden rounded-full bg-surface-container-highest">
+                          <div class="h-full rounded-full bg-primary" [style.width.%]="asNumber(v)"></div>
+                        </div>
+                        <span class="text-xs tabular-nums text-on-surface-variant">{{ asNumber(v) }}%</span>
+                      </div>
+                    }
+                    @case ('rating') {
+                      <div class="flex items-center gap-0.5 text-amber-500">
+                        @for (i of [1,2,3,4,5]; track i) {
+                          <iconify-icon [icon]="i <= asNumber(v) ? 'solar:star-bold' : 'solar:star-linear'" width="14" height="14"></iconify-icon>
+                        }
+                      </div>
+                    }
+                    @case ('tags') {
+                      <div class="flex flex-wrap gap-1">
+                        @for (tag of asTags(v); track tag) {
+                          <span class="rounded-md bg-surface-container-highest px-2 py-0.5 text-xs text-on-surface-variant">{{ tag }}</span>
+                        }
+                      </div>
+                    }
+                    @case ('actions') {
+                      <button matIconButton [matMenuTriggerFor]="rowMenu" aria-label="Row actions">
+                        <iconify-icon icon="solar:menu-dots-bold" width="18" height="18"></iconify-icon>
+                      </button>
+                      <mat-menu #rowMenu="matMenu">
+                        @for (action of col.actions ?? []; track action.label) {
+                          <button mat-menu-item (click)="action.run(row.original)"
+                                  [class.text-error]="action.tone === 'danger'">
+                            <iconify-icon [icon]="action.icon" width="18" height="18" class="mr-2"></iconify-icon>
+                            {{ action.label }}
+                          </button>
+                        }
+                      </mat-menu>
+                    }
+                    @case ('custom') {
+                      @if (templateFor(col.template); as tpl) {
+                        <ng-container [ngTemplateOutlet]="tpl" [ngTemplateOutletContext]="{ $implicit: row.original, value: v }" />
+                      }
+                    }
+                    @default { {{ v }} }
+                  }
+                </td>
+              }
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  @if (!loading() && table.getPageCount() > 1) {
+    <div class="flex flex-wrap items-center justify-between gap-3 text-sm text-on-surface-variant">
+      <span>
+        Page {{ table.getState().pagination.pageIndex + 1 }} of {{ table.getPageCount() }}
+        · {{ table.getFilteredRowModel().rows.length }} records
+      </span>
+      <div class="flex items-center gap-1">
+        <button matIconButton [disabled]="!table.getCanPreviousPage()" (click)="table.setPageIndex(0)" aria-label="First page">
+          <iconify-icon icon="solar:double-alt-arrow-left-linear" width="18" height="18"></iconify-icon>
+        </button>
+        <button matIconButton [disabled]="!table.getCanPreviousPage()" (click)="table.previousPage()" aria-label="Previous page">
+          <iconify-icon icon="solar:alt-arrow-left-linear" width="18" height="18"></iconify-icon>
+        </button>
+        <button matIconButton [disabled]="!table.getCanNextPage()" (click)="table.nextPage()" aria-label="Next page">
+          <iconify-icon icon="solar:alt-arrow-right-linear" width="18" height="18"></iconify-icon>
+        </button>
+        <button matIconButton [disabled]="!table.getCanNextPage()" (click)="table.setPageIndex(table.getPageCount() - 1)" aria-label="Last page">
+          <iconify-icon icon="solar:double-alt-arrow-right-linear" width="18" height="18"></iconify-icon>
+        </button>
+      </div>
+    </div>
+  }
+</div>

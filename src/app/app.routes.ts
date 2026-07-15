@@ -228,7 +228,9 @@ export const routes: Routes = [
           { path: '', pathMatch: 'full', redirectTo: 'posts' },
           leaf('posts', 'Posts')
         ]
-      }
+      },
+      // Temporary: shared-kit verification page (removed in the hardening phase).
+      { path: 'dev-kit', loadComponent: () => import('./shared/dev-kit/dev-kit').then((m) => m.DevKitComponent), title: 'Dev Kit · Elementar RT' }
     ]
   },
 
