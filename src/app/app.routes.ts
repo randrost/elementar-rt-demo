@@ -113,31 +113,24 @@ export const routes: Routes = [
       },
       {
         path: 'account',
-        children: [
-          leaf('notifications', 'Notifications'),
-          {
-            path: 'settings',
-            children: [
-              { path: '', pathMatch: 'full', redirectTo: 'my-profile' },
-              leaf('my-profile', 'My Profile'),
-              leaf('security', 'Security'),
-              leaf('notifications', 'Notification Settings'),
-              leaf('notifications-2', 'Notification Settings'),
-              leaf('billing', 'Billing'),
-              leaf('billing-2', 'Billing'),
-              leaf('sessions', 'Sessions'),
-              leaf('cookie', 'Cookies'),
-              leaf('payment', 'Payment')
-            ]
-          }
-        ]
+        loadChildren: () => import('./account/account.routes').then((m) => m.accountRoutes)
       },
       {
         path: 'user-profile',
         children: [
           { path: '', pathMatch: 'full', redirectTo: 'overview' },
-          leaf('overview', 'Profile Overview'),
-          leaf('talent', 'Talent Profile')
+          {
+            path: 'overview',
+            loadComponent: () => import('./user-profile/profile').then((m) => m.UserProfileComponent),
+            data: { title: 'Profile Overview', variant: 'overview' },
+            title: 'Profile · Elementar RT'
+          },
+          {
+            path: 'talent',
+            loadComponent: () => import('./user-profile/profile').then((m) => m.UserProfileComponent),
+            data: { title: 'Talent Profile', variant: 'talent' },
+            title: 'Talent Profile · Elementar RT'
+          }
         ]
       },
       {
