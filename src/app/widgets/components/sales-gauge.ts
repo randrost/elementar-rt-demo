@@ -29,7 +29,8 @@ export class SalesGaugeWidget {
         radius: '92%',
         center: ['50%', '62%'],
         progress: { show: true, width: 14, roundCap: true, itemStyle: { color: chartColor(0) } },
-        axisLine: { lineStyle: { width: 14 } },
+        // Neutral translucent track: ECharts' default is near-white and blows out in dark mode.
+        axisLine: { lineStyle: { width: 14, color: [[1, 'rgba(128,128,128,0.22)']] } },
         pointer: { show: false },
         axisTick: { show: false },
         splitLine: { show: false },

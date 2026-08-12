@@ -32,16 +32,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        children: [
-          { path: '', pathMatch: 'full', redirectTo: 'getting-started' },
-          leaf('getting-started', 'Getting Started'),
-          leaf('basic', 'Basic Dashboard'),
-          leaf('analytics', 'Analytics Dashboard'),
-          leaf('ecommerce', 'eCommerce Dashboard'),
-          leaf('finance', 'Finance Dashboard'),
-          leaf('explore', 'Explore Dashboard'),
-          leaf('dynamic', 'Dynamic Dashboard')
-        ]
+        loadChildren: () => import('./dashboards/dashboards.routes').then((m) => m.dashboardRoutes)
       },
       {
         path: 'applications',
