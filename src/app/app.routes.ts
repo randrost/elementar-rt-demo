@@ -81,7 +81,12 @@ export const routes: Routes = [
             data: { title: 'Contacts' },
             title: 'Contacts · Elementar RT'
           },
-          leaf('ai-studio', 'AI Studio'),
+          {
+            path: 'ai-studio',
+            loadComponent: () => import('./applications/ai-studio/ai-studio').then((m) => m.AiStudioComponent),
+            data: { title: 'AI Studio' },
+            title: 'AI Studio · Elementar RT'
+          },
           {
             path: 'help-center',
             loadChildren: () =>
@@ -139,54 +144,39 @@ export const routes: Routes = [
       },
       {
         path: 'cards',
-        children: [
-          { path: '', pathMatch: 'full', redirectTo: 'general' },
-          leaf('general', 'General Cards'),
-          leaf('users', 'User Cards')
-        ]
+        loadChildren: () => import('./gallery/gallery.routes').then((m) => m.cardsRoutes)
       },
       {
         path: 'prebuilt',
-        children: [
-          { path: '', pathMatch: 'full', redirectTo: 'skeleton' },
-          leaf('skeleton', 'Skeletons'),
-          leaf('notifications', 'Notifications'),
-          leaf('selects', 'Selects'),
-          leaf('dialogs', 'Dialogs')
-        ]
+        loadChildren: () => import('./gallery/gallery.routes').then((m) => m.prebuiltRoutes)
       },
       {
         path: 'datatables',
-        children: [
-          { path: '', pathMatch: 'full', redirectTo: 'general' },
-          leaf('general', 'Data Tables'),
-          leaf('users', 'Users Table')
-        ]
+        loadChildren: () => import('./gallery/gallery.routes').then((m) => m.datatableRoutes)
       },
-      leaf('themes', 'Themes'),
+      {
+        path: 'themes',
+        loadComponent: () => import('./gallery/themes').then((m) => m.GalleryThemesComponent),
+        data: { title: 'Themes' },
+        title: 'Themes · Elementar RT'
+      },
       {
         path: 'pricing',
-        children: [
-          { path: '', pathMatch: 'full', redirectTo: 'basic' },
-          leaf('basic', 'Pricing'),
-          leaf('membership', 'Membership Plans')
-        ]
+        loadChildren: () => import('./gallery/gallery.routes').then((m) => m.pricingRoutes)
       },
-      leaf('integrations', 'Integrations'),
+      {
+        path: 'integrations',
+        loadComponent: () => import('./gallery/integrations').then((m) => m.GalleryIntegrationsComponent),
+        data: { title: 'Integrations' },
+        title: 'Integrations · Elementar RT'
+      },
       {
         path: 'service-pages',
-        children: [
-          { path: '', pathMatch: 'full', redirectTo: 'email-activation' },
-          leaf('email-activation', 'Email Activation'),
-          leaf('integrations', 'Integrations Status')
-        ]
+        loadChildren: () => import('./gallery/gallery.routes').then((m) => m.servicePagesRoutes)
       },
       {
         path: 'content',
-        children: [
-          { path: '', pathMatch: 'full', redirectTo: 'posts' },
-          leaf('posts', 'Posts')
-        ]
+        loadChildren: () => import('./gallery/gallery.routes').then((m) => m.contentRoutes)
       },
       // Temporary: shared-kit verification page (removed in the hardening phase).
       { path: 'dev-kit', loadComponent: () => import('./shared/dev-kit/dev-kit').then((m) => m.DevKitComponent), title: 'Dev Kit · Elementar RT' }
