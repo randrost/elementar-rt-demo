@@ -6,14 +6,24 @@ export function randomId(prefix = ''): string {
   return `${prefix}${Math.random().toString(36).slice(2, 10)}`;
 }
 
-/** Seeded pseudo-random in [0,1) for reproducible mock series. */
+/**
+ * Seeded pseudo-random in [0,1) for reproducible mock series.
+ *
+ * The generator is warmed up before it is handed back: this Lehmer LCG returns
+ * roughly `seed / 2^31` on its first call, so a small seed yields ~0.0001 every
+ * time. Callers that create a generator per item and read only a draw or two
+ * would otherwise land on the same side of every threshold — every message
+ * unread, every invoice one line long.
+ */
 export function seededRandom(seed: number): () => number {
   let s = seed % 2147483647;
   if (s <= 0) s += 2147483646;
-  return () => {
+  const next = () => {
     s = (s * 16807) % 2147483647;
     return (s - 1) / 2147483646;
   };
+  for (let i = 0; i < 4; i++) next();
+  return next;
 }
 
 export function pick<T>(arr: readonly T[], rnd: () => number = Math.random): T {

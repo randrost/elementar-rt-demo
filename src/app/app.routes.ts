@@ -39,7 +39,13 @@ export const routes: Routes = [
         children: [
           leaf('calendar', 'Calendar'),
           leaf('messenger', 'Messenger'),
-          leaf('file-manager', 'File Manager'),
+          {
+            path: 'file-manager',
+            loadComponent: () =>
+              import('./applications/file-manager/file-manager').then((m) => m.FileManagerComponent),
+            data: { title: 'File Manager' },
+            title: 'File Manager · Elementar RT'
+          },
           leaf('content-editor', 'Content Editor'),
           {
             path: 'kanban',
@@ -67,25 +73,11 @@ export const routes: Routes = [
           },
           {
             path: 'invoice',
-            children: [
-              { path: '', pathMatch: 'full', redirectTo: 'list' },
-              leaf('list', 'Invoices'),
-              leaf('details/:id', 'Invoice Details'),
-              leaf('new', 'New Invoice'),
-              leaf('edit/:id', 'Edit Invoice')
-            ]
+            loadChildren: () => import('./applications/invoice/invoice.routes').then((m) => m.invoiceRoutes)
           },
           {
             path: 'email',
-            children: [
-              { path: '', pathMatch: 'full', redirectTo: 'inbox' },
-              leaf('inbox', 'Inbox'),
-              leaf('sent', 'Sent'),
-              leaf('drafts', 'Drafts'),
-              leaf('spam', 'Spam'),
-              leaf('trash', 'Trash'),
-              leaf('label/:label', 'Label')
-            ]
+            loadChildren: () => import('./applications/email/email.routes').then((m) => m.emailRoutes)
           },
           {
             path: 'projects',
