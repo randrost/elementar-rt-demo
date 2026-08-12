@@ -94,7 +94,7 @@ export class MyProfileComponent {
   private readonly defaults: Record<string, string> = {
     name: 'Rostyslav Tulika',
     title: 'Product Engineer',
-    email: 'r.tulika@narz.net',
+    email: 'rostik.tulika@gmail.com',
     phone: '+44 20 7946 0123',
     location: 'London, UK',
     website: 'https://elementar-rt.dev',

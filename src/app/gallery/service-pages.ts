@@ -40,7 +40,7 @@ const HEALTH: Record<Health, { label: string; dot: string; chip: string }> = {
             <h1 class="mt-6 text-2xl font-semibold text-on-surface">Confirm your email</h1>
             <p class="mt-2 text-sm text-on-surface-variant">
               We sent a confirmation link to
-              <span class="font-medium text-on-surface">r.tulika&#64;narz.net</span>. Open it to finish
+              <span class="font-medium text-on-surface">rostik.tulika&#64;gmail.com</span>. Open it to finish
               activating your account.
             </p>
 
