@@ -11,7 +11,7 @@ import { WidgetDataService } from '../widget-data';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <app-widget-card title="Income vs expense" subtitle="Monthly totals">
-      <div [appChartHost]="option" class="h-full min-h-[16rem] w-full"></div>
+      <div [appChartHost]="option" class="h-64 w-full"></div>
     </app-widget-card>
   `
 })
