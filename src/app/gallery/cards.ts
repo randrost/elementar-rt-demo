@@ -32,7 +32,7 @@ const TONE_CLASSES: Record<string, string> = {
               <div>
                 <p class="text-xs text-on-surface-variant">Monthly revenue</p>
                 <p class="mt-1 text-3xl font-semibold tabular-nums text-on-surface">$112,480</p>
-                <p class="mt-1 flex items-center gap-1 text-xs text-green-600 dark:text-green-400">
+                <p class="mt-1 flex items-center gap-1 text-xs text-green-700 dark:text-green-400">
                   <iconify-icon icon="solar:alt-arrow-up-linear" width="14" height="14"></iconify-icon>
                   +12.5% vs last month
                 </p>
@@ -48,7 +48,7 @@ const TONE_CLASSES: Record<string, string> = {
             <div class="h-32 bg-gradient-to-br from-indigo-500 to-sky-400"></div>
             <div class="p-5">
               <p class="text-xs uppercase tracking-wide text-on-surface-variant">Media</p>
-              <h3 class="mt-2 text-base font-semibold text-on-surface">Design system 2.0</h3>
+              <h2 class="mt-2 text-base font-semibold text-on-surface">Design system 2.0</h2>
               <p class="mt-1.5 text-sm text-on-surface-variant">
                 Token overhaul, dark mode parity, and a documented component API.
               </p>
@@ -62,7 +62,7 @@ const TONE_CLASSES: Record<string, string> = {
           <!-- List -->
           <section class="rounded-2xl border border-outline-variant bg-surface p-5">
             <p class="text-xs uppercase tracking-wide text-on-surface-variant">List</p>
-            <h3 class="mt-2 text-base font-semibold text-on-surface">Recent activity</h3>
+            <h2 class="mt-2 text-base font-semibold text-on-surface">Recent activity</h2>
             <ul class="mt-4 flex flex-col divide-y divide-outline-variant">
               @for (item of activity; track item.text) {
                 <li class="flex items-center gap-3 py-3 first:pt-0 last:pb-0">
@@ -79,7 +79,7 @@ const TONE_CLASSES: Record<string, string> = {
           <!-- Progress -->
           <section class="rounded-2xl border border-outline-variant bg-surface p-5">
             <p class="text-xs uppercase tracking-wide text-on-surface-variant">Progress</p>
-            <h3 class="mt-2 text-base font-semibold text-on-surface">Storage</h3>
+            <h2 class="mt-2 text-base font-semibold text-on-surface">Storage</h2>
             <p class="mt-1 text-sm text-on-surface-variant">184 GB of 256 GB used</p>
             <div class="mt-4 h-2 overflow-hidden rounded-full bg-surface-container-highest">
               <div class="h-full rounded-full bg-primary" style="width: 72%"></div>
@@ -98,7 +98,7 @@ const TONE_CLASSES: Record<string, string> = {
           <!-- Callout -->
           <section class="rounded-2xl border border-primary bg-primary-container p-5 text-on-primary-container">
             <p class="text-xs uppercase tracking-wide opacity-70">Callout</p>
-            <h3 class="mt-2 text-base font-semibold">You are on the Team plan</h3>
+            <h2 class="mt-2 text-base font-semibold">You are on the Team plan</h2>
             <p class="mt-1.5 text-sm opacity-90">
               Business adds SSO, audit log export, and an uptime SLA.
             </p>

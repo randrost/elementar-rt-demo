@@ -149,7 +149,7 @@ function dayLabel(iso: string): string {
               </button>
             </header>
 
-            <div #scroller class="flex-1 space-y-1 overflow-y-auto p-4">
+            <div #scroller class="flex-1 space-y-1 overflow-y-auto p-4" tabindex="0">
               @for (entry of entries(); track entry.key) {
                 @if (entry.kind === 'separator') {
                   <div class="flex items-center gap-3 py-3">

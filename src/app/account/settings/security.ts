@@ -59,7 +59,7 @@ interface ConnectedApp {
               autocomplete="new-password"
               class="mt-1.5 w-full rounded-xl border border-outline-variant bg-surface px-3 py-2 text-sm outline-none focus:border-primary" />
             @if (confirm() && confirm() !== next()) {
-              <p class="mt-1.5 text-xs text-red-600 dark:text-red-400">Both passwords must match.</p>
+              <p class="mt-1.5 text-xs text-red-700 dark:text-red-400">Both passwords must match.</p>
             }
           </div>
         </div>

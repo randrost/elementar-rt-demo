@@ -36,7 +36,7 @@ function fromLocalInput(value: string): string {
     /* FullCalendar ships its own light palette; map its variables onto the app's
        tokens so it follows the theme instead of fighting it. */
     :host ::ng-deep .fc {
-      --fc-border-color: var(--mat-sys-outline-variant, rgb(0 0 0 / 0.12));
+      --fc-border-color: var(--color-outline-variant, rgb(0 0 0 / 0.12));
       --fc-page-bg-color: transparent;
       --fc-neutral-bg-color: color-mix(in srgb, currentColor 6%, transparent);
       --fc-today-bg-color: color-mix(in srgb, currentColor 6%, transparent);
@@ -60,6 +60,11 @@ function fromLocalInput(value: string): string {
     }
     :host ::ng-deep .fc .fc-list-event:hover td {
       background: color-mix(in srgb, currentColor 6%, transparent);
+    }
+    /* FullCalendar dims out-of-month day numbers to 0.3 opacity, which lands at
+       1.9:1. Enough to still read as "not this month", enough to pass 4.5:1. */
+    :host ::ng-deep .fc .fc-day-other .fc-daygrid-day-top {
+      opacity: 0.65;
     }
   `,
   template: `

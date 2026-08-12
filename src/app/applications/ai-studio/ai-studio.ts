@@ -159,7 +159,7 @@ const SUGGESTIONS = [
           </div>
 
           <!-- Model panel -->
-          <aside class="w-full shrink-0 lg:w-80">
+          <aside class="w-full shrink-0 lg:w-80" aria-label="Model settings">
             <div class="rounded-2xl border border-outline-variant bg-surface p-5">
               <h2 class="text-sm font-semibold text-on-surface">Model</h2>
               <p class="mt-1 text-xs text-on-surface-variant">

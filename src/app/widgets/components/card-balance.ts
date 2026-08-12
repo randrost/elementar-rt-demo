@@ -47,5 +47,5 @@ export class CardBalanceWidget {
   protected readonly lineColor = chartColor(0);
 
   protected readonly deltaClass =
-    this.card.delta >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400';
+    this.card.delta >= 0 ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-400';
 }

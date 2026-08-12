@@ -125,12 +125,12 @@ import { Contact, ContactsService } from './mock-data';
 
               <dl class="mt-8 grid gap-px overflow-hidden rounded-2xl border border-outline-variant bg-outline-variant sm:grid-cols-2">
                 @for (field of fields(contact); track field.label) {
-                  <div class="flex items-start gap-3 bg-surface p-4">
-                    <iconify-icon [icon]="field.icon" width="20" height="20" class="mt-0.5 shrink-0 text-primary"></iconify-icon>
-                    <div class="min-w-0">
-                      <dt class="text-xs text-on-surface-variant">{{ field.label }}</dt>
-                      <dd class="truncate text-sm text-on-surface">{{ field.value }}</dd>
-                    </div>
+                  <div class="bg-surface p-4">
+                    <dt class="flex items-center gap-2 text-xs text-on-surface-variant">
+                      <iconify-icon [icon]="field.icon" width="18" height="18" class="shrink-0 text-primary"></iconify-icon>
+                      {{ field.label }}
+                    </dt>
+                    <dd class="mt-1 truncate text-sm text-on-surface">{{ field.value }}</dd>
                   </div>
                 }
               </dl>

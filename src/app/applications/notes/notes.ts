@@ -96,7 +96,7 @@ import { Note, NOTE_COLORS, NOTE_SURFACE, NOTE_SWATCH, NoteColor, NotesService }
               } @else {
                 <div class="group">
                   <div class="flex items-start justify-between gap-2">
-                    <h3 class="text-sm font-semibold text-on-surface">{{ note.title }}</h3>
+                    <h2 class="text-sm font-semibold text-on-surface">{{ note.title }}</h2>
                     <div class="flex shrink-0 gap-0.5 opacity-0 transition-opacity focus-within:opacity-100 group-hover:opacity-100">
                       <button
                         type="button"
@@ -107,7 +107,7 @@ import { Note, NOTE_COLORS, NOTE_SURFACE, NOTE_SWATCH, NoteColor, NotesService }
                       </button>
                       <button
                         type="button"
-                        class="grid size-7 place-items-center rounded-lg text-on-surface-variant hover:text-red-600 dark:hover:text-red-400"
+                        class="grid size-7 place-items-center rounded-lg text-on-surface-variant hover:text-red-700 dark:hover:text-red-400"
                         (click)="store.remove(note.id)"
                         [attr.aria-label]="'Delete ' + note.title">
                         <iconify-icon icon="solar:trash-bin-trash-linear" width="15" height="15"></iconify-icon>

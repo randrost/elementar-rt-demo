@@ -36,7 +36,7 @@ const STATUS_CLASSES: Record<TransactionStatus, string> = {
             </div>
 
             <div class="flex shrink-0 flex-col items-end gap-1">
-              <span class="text-sm font-semibold tabular-nums" [class]="row.amount > 0 ? 'text-green-600 dark:text-green-400' : 'text-on-surface'">
+              <span class="text-sm font-semibold tabular-nums" [class]="row.amount > 0 ? 'text-green-700 dark:text-green-400' : 'text-on-surface'">
                 {{ row.amount > 0 ? '+' : '−' }}{{ abs(row.amount) | currency: 'USD' : 'symbol' : '1.0-0' }}
               </span>
               <span class="rounded-full px-2 py-0.5 text-[11px] font-medium capitalize" [class]="statusClass(row.status)">

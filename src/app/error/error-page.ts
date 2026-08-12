@@ -29,7 +29,7 @@ const TONE_PANEL: Record<ErrorTone, string> = {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     @if (variant() === 'split') {
-      <div class="flex min-h-screen bg-surface text-on-surface">
+      <main class="flex min-h-screen bg-surface text-on-surface">
         <div class="flex w-full flex-col justify-center px-6 py-16 sm:px-12 lg:w-1/2 lg:px-16">
           <a routerLink="/" class="mb-12 flex items-center gap-2.5">
             <span class="grid size-9 place-items-center rounded-xl bg-primary text-on-primary">
@@ -63,9 +63,9 @@ const TONE_PANEL: Record<ErrorTone, string> = {
           <span class="pointer-events-none absolute -right-20 -top-24 size-96 rounded-full bg-white/10 blur-3xl"></span>
           <span class="pointer-events-none absolute -bottom-32 -left-20 size-96 rounded-full bg-white/10 blur-3xl"></span>
         </div>
-      </div>
+      </main>
     } @else {
-      <div class="grid min-h-screen place-items-center bg-surface px-6 py-16 text-on-surface">
+      <main class="grid min-h-screen place-items-center bg-surface px-6 py-16 text-on-surface">
         <div class="w-full max-w-md text-center">
           <span class="mx-auto grid size-16 place-items-center rounded-2xl" [class]="badgeClass()">
             <iconify-icon [icon]="icon()" width="34" height="34"></iconify-icon>
@@ -84,7 +84,7 @@ const TONE_PANEL: Record<ErrorTone, string> = {
             </ng-content>
           </div>
         </div>
-      </div>
+      </main>
     }
   `
 })

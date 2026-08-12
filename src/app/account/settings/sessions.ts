@@ -35,7 +35,7 @@ import { AccountService, DeviceSession } from '../mock-data';
               <th class="pb-3 font-medium">Device</th>
               <th class="pb-3 font-medium">Location</th>
               <th class="pb-3 font-medium">Last active</th>
-              <th class="w-24 pb-3"></th>
+              <th class="w-24 pb-3"><span class="sr-only">Actions</span></th>
             </tr>
           </thead>
           <tbody>

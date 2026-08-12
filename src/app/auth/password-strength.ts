@@ -22,10 +22,10 @@ const LABELS = ['', 'Weak', 'Fair', 'Good', 'Strong'];
 const BAR_CLASSES = ['bg-outline-variant', 'bg-red-500', 'bg-orange-500', 'bg-amber-500', 'bg-green-500'];
 const TEXT_CLASSES = [
   'text-on-surface-variant',
-  'text-red-600 dark:text-red-400',
+  'text-red-700 dark:text-red-400',
   'text-orange-600 dark:text-orange-400',
   'text-amber-600 dark:text-amber-400',
-  'text-green-600 dark:text-green-400'
+  'text-green-700 dark:text-green-400'
 ];
 
 /** Four-segment strength bar plus an optional live requirement checklist. */
@@ -52,7 +52,7 @@ const TEXT_CLASSES = [
             @let met = rule.test(value());
             <li
               class="flex items-center gap-1.5 text-xs"
-              [class]="met ? 'text-green-600 dark:text-green-400' : 'text-on-surface-variant'">
+              [class]="met ? 'text-green-700 dark:text-green-400' : 'text-on-surface-variant'">
               <iconify-icon
                 [icon]="met ? 'solar:check-circle-bold' : 'solar:close-circle-linear'"
                 width="14"

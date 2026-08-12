@@ -46,7 +46,7 @@ export class CryptoTickerWidget {
   protected readonly coins = inject(WidgetDataService).cryptoTickers();
 
   protected deltaClass(change: number): string {
-    return change >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400';
+    return change >= 0 ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-400';
   }
 
   protected sparkColor(change: number): string {

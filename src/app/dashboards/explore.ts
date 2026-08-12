@@ -51,7 +51,7 @@ const FILTERS: readonly { id: Filter; label: string }[] = [
           @for (widget of visible(); track widget.id) {
             <div [class]="widget.defaultCols >= 12 ? 'lg:col-span-12' : 'lg:col-span-6'">
               <div class="mb-2 flex items-baseline gap-2">
-                <h3 class="text-sm font-semibold text-on-surface">{{ widget.name }}</h3>
+                <h2 class="text-sm font-semibold text-on-surface">{{ widget.name }}</h2>
                 <code class="rounded bg-surface-container-highest px-1.5 py-0.5 text-[11px] text-on-surface-variant">
                   {{ widget.id }}
                 </code>

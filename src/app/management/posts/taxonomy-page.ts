@@ -19,7 +19,7 @@ type Kind = 'categories' | 'topics';
     <app-page [title]="heading()" [description]="subheading()">
       <div class="flex flex-col gap-6 lg:flex-row">
         <!-- Add form -->
-        <aside class="w-full shrink-0 lg:w-80">
+        <aside class="w-full shrink-0 lg:w-80" aria-label="Add form">
           <div class="rounded-2xl border border-outline-variant bg-surface p-5">
             <h2 class="text-sm font-semibold text-on-surface">Add {{ singular() }}</h2>
 
@@ -52,7 +52,7 @@ type Kind = 'categories' | 'topics';
                   <th class="px-5 py-3 font-medium">Name</th>
                   <th class="px-5 py-3 font-medium">Slug</th>
                   <th class="px-5 py-3 text-right font-medium">Posts</th>
-                  <th class="w-14 px-5 py-3"></th>
+                  <th class="w-14 px-5 py-3"><span class="sr-only">Actions</span></th>
                 </tr>
               </thead>
               <tbody>
@@ -67,7 +67,7 @@ type Kind = 'categories' | 'topics';
                     <td class="px-5 py-3.5 text-right">
                       <button
                         type="button"
-                        class="grid size-8 place-items-center rounded-lg text-on-surface-variant hover:text-red-600 dark:hover:text-red-400"
+                        class="grid size-8 place-items-center rounded-lg text-on-surface-variant hover:text-red-700 dark:hover:text-red-400"
                         (click)="remove(item.id)"
                         [attr.aria-label]="'Delete ' + item.name">
                         <iconify-icon icon="solar:trash-bin-trash-linear" width="16" height="16"></iconify-icon>

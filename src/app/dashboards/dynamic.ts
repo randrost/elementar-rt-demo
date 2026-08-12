@@ -127,7 +127,7 @@ function loadLayout(): KtdGridLayoutItem[] {
                   </button>
                   <button
                     type="button"
-                    class="grid size-8 place-items-center rounded-lg bg-surface-container-highest text-on-surface-variant hover:text-red-600 dark:hover:text-red-400"
+                    class="grid size-8 place-items-center rounded-lg bg-surface-container-highest text-on-surface-variant hover:text-red-700 dark:hover:text-red-400"
                     (click)="remove(item.id)"
                     [attr.aria-label]="'Remove ' + nameOf(item.id)">
                     <iconify-icon icon="solar:close-circle-linear" width="16" height="16"></iconify-icon>
@@ -147,7 +147,7 @@ function loadLayout(): KtdGridLayoutItem[] {
       <div class="fixed inset-0 z-50 flex justify-end" role="dialog" aria-modal="true" aria-label="Add a widget">
         <button type="button" class="absolute inset-0 bg-black/40" (click)="closePicker()" tabindex="-1" aria-hidden="true"></button>
 
-        <aside class="relative flex h-full w-full max-w-md flex-col bg-surface shadow-2xl">
+        <aside class="relative flex h-full w-full max-w-md flex-col bg-surface shadow-2xl" aria-label="Widget picker">
           <header class="flex items-center justify-between gap-3 border-b border-outline-variant px-5 py-4">
             <div>
               <h2 class="text-base font-semibold text-on-surface">Add a widget</h2>

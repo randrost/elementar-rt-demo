@@ -132,7 +132,7 @@ const STATUSES: readonly InvoiceStatus[] = ['draft', 'sent', 'paid', 'overdue', 
                   <th class="w-24 pb-2 text-right font-medium">Qty</th>
                   <th class="w-36 pb-2 text-right font-medium">Unit price</th>
                   <th class="w-32 pb-2 text-right font-medium">Amount</th>
-                  <th class="w-12 pb-2"></th>
+                  <th class="w-12 pb-2"><span class="sr-only">Remove</span></th>
                 </tr>
               </thead>
               <tbody formArrayName="items">

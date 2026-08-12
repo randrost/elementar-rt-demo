@@ -47,7 +47,7 @@ export class StatTilesWidget {
   protected readonly tiles = inject(WidgetDataService).statTiles();
 
   protected deltaClass(delta: number): string {
-    return delta >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400';
+    return delta >= 0 ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-400';
   }
 
   protected sparkColor(delta: number): string {

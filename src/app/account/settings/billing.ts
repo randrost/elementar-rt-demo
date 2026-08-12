@@ -101,7 +101,7 @@ const STATUS_CLASSES: Record<PlanInvoice['status'], string> = {
                   <th class="pb-3 font-medium">Date</th>
                   <th class="pb-3 text-right font-medium">Amount</th>
                   <th class="pb-3 text-center font-medium">Status</th>
-                  <th class="w-20 pb-3"></th>
+                  <th class="w-20 pb-3"><span class="sr-only">Download</span></th>
                 </tr>
               </thead>
               <tbody>

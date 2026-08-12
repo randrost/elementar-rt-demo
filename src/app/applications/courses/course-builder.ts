@@ -82,7 +82,7 @@ const KINDS: readonly Lesson['kind'][] = ['video', 'reading', 'exercise', 'quiz'
 
                     <button
                       type="button"
-                      class="grid size-8 shrink-0 place-items-center rounded-lg text-on-surface-variant hover:text-red-600 dark:hover:text-red-400"
+                      class="grid size-8 shrink-0 place-items-center rounded-lg text-on-surface-variant hover:text-red-700 dark:hover:text-red-400"
                       (click)="store.removeSection(item.id, section.id)"
                       [attr.aria-label]="'Delete section ' + section.title">
                       <iconify-icon icon="solar:trash-bin-trash-linear" width="16" height="16"></iconify-icon>
@@ -113,7 +113,7 @@ const KINDS: readonly Lesson['kind'][] = ['video', 'reading', 'exercise', 'quiz'
                         </span>
                         <button
                           type="button"
-                          class="grid size-7 shrink-0 place-items-center rounded-lg text-on-surface-variant hover:text-red-600 dark:hover:text-red-400"
+                          class="grid size-7 shrink-0 place-items-center rounded-lg text-on-surface-variant hover:text-red-700 dark:hover:text-red-400"
                           (click)="removeLesson($event, item.id, lesson.id)"
                           [attr.aria-label]="'Delete lesson ' + lesson.title">
                           <iconify-icon icon="solar:close-circle-linear" width="15" height="15"></iconify-icon>
@@ -148,7 +148,7 @@ const KINDS: readonly Lesson['kind'][] = ['video', 'reading', 'exercise', 'quiz'
           </div>
 
           <!-- Lesson editor -->
-          <aside class="w-full shrink-0 lg:w-80">
+          <aside class="w-full shrink-0 lg:w-80" aria-label="Lesson editor">
             @if (selected(); as lesson) {
               <div class="sticky top-6 rounded-2xl border border-outline-variant bg-surface p-5">
                 <h2 class="text-sm font-semibold text-on-surface">Lesson</h2>

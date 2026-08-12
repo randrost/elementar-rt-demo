@@ -118,6 +118,8 @@ export class CalendarHostDirective {
       height: '100%',
       firstDay: 1,
       nowIndicator: true,
+      // Event fills are chosen for 4.5:1 against this.
+      eventTextColor: '#ffffff',
       dayMaxEvents: 3,
       selectable: true,
       editable: true,

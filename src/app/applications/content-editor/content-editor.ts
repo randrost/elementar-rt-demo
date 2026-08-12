@@ -94,7 +94,7 @@ const TYPES = Object.keys(BLOCK_META) as BlockType[];
                       </button>
                       <button
                         type="button"
-                        class="grid size-7 place-items-center rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-red-600 dark:hover:text-red-400"
+                        class="grid size-7 place-items-center rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-red-700 dark:hover:text-red-400"
                         (click)="remove($event, block.id)"
                         [attr.aria-label]="'Delete ' + meta(block).label">
                         <iconify-icon icon="solar:trash-bin-trash-linear" width="15" height="15"></iconify-icon>
@@ -187,7 +187,7 @@ const TYPES = Object.keys(BLOCK_META) as BlockType[];
 
           <!-- Settings -->
           @if (!preview()) {
-            <aside class="w-full shrink-0 lg:w-80">
+            <aside class="w-full shrink-0 lg:w-80" aria-label="Block settings">
               <div class="sticky top-6 rounded-2xl border border-outline-variant bg-surface p-5">
                 @if (selected(); as block) {
                   <div class="flex items-center gap-2">

@@ -118,6 +118,7 @@ function loadDone(): string[] {
               class="h-full rounded-full bg-primary transition-[width] duration-300"
               [style.width.%]="progress()"
               role="progressbar"
+              aria-label="Setup checklist progress"
               [attr.aria-valuenow]="doneCount()"
               aria-valuemin="0"
               [attr.aria-valuemax]="checklist.length"></div>

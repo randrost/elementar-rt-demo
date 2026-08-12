@@ -29,7 +29,7 @@ import { PageComponent } from '../../shell/page/page';
           } @else {
             <div>
               <div class="h-28 rounded-xl bg-gradient-to-br from-indigo-500 to-sky-400"></div>
-              <h3 class="mt-4 text-base font-semibold text-on-surface">Design system 2.0</h3>
+              <h2 class="mt-4 text-base font-semibold text-on-surface">Design system 2.0</h2>
               <p class="mt-1.5 text-sm text-on-surface-variant">
                 Token overhaul, dark mode parity, and a documented component API.
               </p>
@@ -76,7 +76,7 @@ import { PageComponent } from '../../shell/page/page';
             <div>
               <p class="text-xs text-on-surface-variant">Monthly revenue</p>
               <p class="mt-1 text-3xl font-semibold tabular-nums text-on-surface">$112,480</p>
-              <p class="mt-3 text-xs text-green-600 dark:text-green-400">+12.5% vs last month</p>
+              <p class="mt-3 text-xs text-green-700 dark:text-green-400">+12.5% vs last month</p>
             </div>
           }
         </section>

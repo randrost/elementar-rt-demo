@@ -16,11 +16,11 @@ export interface ScheduleEvent {
 }
 
 export const EVENT_KINDS: Record<EventKind, { label: string; color: string; chip: string }> = {
-  meeting: { label: 'Meeting', color: '#6366f1', chip: 'bg-indigo-500' },
-  focus: { label: 'Focus time', color: '#22c55e', chip: 'bg-green-500' },
-  review: { label: 'Review', color: '#f59e0b', chip: 'bg-amber-500' },
-  personal: { label: 'Personal', color: '#ec4899', chip: 'bg-pink-500' },
-  holiday: { label: 'Holiday', color: '#06b6d4', chip: 'bg-cyan-500' }
+  meeting: { label: 'Meeting', color: '#4f46e5', chip: 'bg-indigo-600' },
+  focus: { label: 'Focus time', color: '#15803d', chip: 'bg-green-700' },
+  review: { label: 'Review', color: '#b45309', chip: 'bg-amber-700' },
+  personal: { label: 'Personal', color: '#be185d', chip: 'bg-pink-700' },
+  holiday: { label: 'Holiday', color: '#0e7490', chip: 'bg-cyan-700' }
 };
 
 /** Builds an ISO timestamp `dayOffset` days from today at the given local time. */

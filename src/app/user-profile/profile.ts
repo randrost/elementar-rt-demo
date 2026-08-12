@@ -143,17 +143,17 @@ const STATS = [
             </section>
           </div>
 
-          <aside class="w-full shrink-0 lg:w-80">
+          <aside class="w-full shrink-0 lg:w-80" aria-label="Profile details">
             <section class="rounded-2xl border border-outline-variant bg-surface p-6">
               <h2 class="text-base font-semibold text-on-surface">Details</h2>
               <dl class="mt-4 flex flex-col gap-3 text-sm">
                 @for (detail of details; track detail.label) {
-                  <div class="flex items-start gap-2.5">
-                    <iconify-icon [icon]="detail.icon" width="18" height="18" class="mt-0.5 shrink-0 text-primary"></iconify-icon>
-                    <div class="min-w-0">
-                      <dt class="text-xs text-on-surface-variant">{{ detail.label }}</dt>
-                      <dd class="truncate text-on-surface">{{ detail.value }}</dd>
-                    </div>
+                  <div class="min-w-0">
+                    <dt class="flex items-center gap-2 text-xs text-on-surface-variant">
+                      <iconify-icon [icon]="detail.icon" width="18" height="18" class="shrink-0 text-primary"></iconify-icon>
+                      {{ detail.label }}
+                    </dt>
+                    <dd class="mt-0.5 truncate text-on-surface">{{ detail.value }}</dd>
                   </div>
                 }
               </dl>
@@ -200,7 +200,7 @@ const STATS = [
             </section>
           </div>
 
-          <aside class="w-full shrink-0 lg:w-80">
+          <aside class="w-full shrink-0 lg:w-80" aria-label="Skills">
             <section class="rounded-2xl border border-outline-variant bg-surface p-6">
               <h2 class="text-base font-semibold text-on-surface">Skills</h2>
               <div class="mt-5 flex flex-col gap-4">

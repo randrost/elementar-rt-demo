@@ -13,7 +13,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
         <header class="mb-4 flex items-start justify-between gap-3">
           <div class="min-w-0">
             @if (title()) {
-              <h3 class="truncate text-sm font-semibold text-on-surface">{{ title() }}</h3>
+              <h2 class="truncate text-sm font-semibold text-on-surface">{{ title() }}</h2>
             }
             @if (subtitle()) {
               <p class="mt-0.5 truncate text-xs text-on-surface-variant">{{ subtitle() }}</p>

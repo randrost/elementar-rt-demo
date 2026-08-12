@@ -34,7 +34,7 @@ const STATUSES = Object.keys(POST_STATUS) as PostStatus[];
           </div>
         </div>
 
-        <aside class="w-full shrink-0 lg:w-80">
+        <aside class="w-full shrink-0 lg:w-80" aria-label="Post settings">
           <div class="sticky top-6 flex flex-col gap-4">
             <section class="rounded-2xl border border-outline-variant bg-surface p-5">
               <h2 class="text-sm font-semibold text-on-surface">Publishing</h2>

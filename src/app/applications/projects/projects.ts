@@ -97,7 +97,7 @@ const BOARD_COLUMNS: readonly ProjectStatus[] = ['on-track', 'at-risk', 'blocked
     <ng-template #card let-project>
       <article class="flex flex-col rounded-2xl border border-outline-variant bg-surface p-5">
         <div class="flex items-start justify-between gap-3">
-          <h3 class="text-sm font-semibold text-on-surface">{{ project.name }}</h3>
+          <h2 class="text-sm font-semibold text-on-surface">{{ project.name }}</h2>
           <span class="shrink-0 rounded-full px-2 py-0.5 text-[11px] font-medium" [class]="statusMeta(project.status).classes">
             {{ statusMeta(project.status).label }}
           </span>

@@ -1,5 +1,7 @@
 <div class="flex h-screen flex-col overflow-hidden bg-background text-on-background">
-  <!-- Topbar: announcement + incidents -->
+  <!-- Topbar: announcement + incidents.
+       Wrapped in a landmark so the content is not orphaned outside one. -->
+  <aside class="contents" aria-label="Site notices">
   @if (store.hasAnnouncement()) {
     @let a = store.announcement();
     <div class="flex shrink-0 items-center justify-center gap-3 bg-primary px-4 py-1.5 text-sm text-on-primary">
@@ -28,17 +30,18 @@
       </button>
     </div>
   }
+  </aside>
 
   <div class="flex flex-1 overflow-hidden">
     <!-- Desktop sidebar -->
-    <aside class="hidden shrink-0 border-r border-outline-variant lg:block">
+    <aside class="hidden shrink-0 border-r border-outline-variant lg:block" aria-label="Sidebar">
       <app-sidebar />
     </aside>
 
     <!-- Mobile sidebar drawer -->
     @if (store.mobileSidebarOpen()) {
       <div class="fixed inset-0 z-40 bg-scrim/50 lg:hidden" (click)="store.setMobileSidebarOpen(false)" aria-hidden="true"></div>
-      <aside class="fixed inset-y-0 left-0 z-50 border-r border-outline-variant shadow-xl lg:hidden">
+      <aside class="fixed inset-y-0 left-0 z-50 border-r border-outline-variant shadow-xl lg:hidden" aria-label="Sidebar">
         <app-sidebar />
       </aside>
     }
@@ -48,7 +51,7 @@
       <header class="shrink-0 border-b border-outline-variant bg-surface">
         <app-header />
       </header>
-      <main class="emr-scroll-lg flex-1 overflow-y-auto">
+      <main class="emr-scroll-lg flex-1 overflow-y-auto" tabindex="0">
         <router-outlet />
       </main>
     </div>
