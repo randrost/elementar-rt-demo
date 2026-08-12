@@ -1,11 +1,5 @@
 import { Routes } from '@angular/router';
 import { ShellComponent } from './shell/shell';
-import { PlaceholderComponent } from './shared/placeholder/placeholder';
-
-/** Placeholder leaf route; replaced by real feature components phase by phase. */
-function leaf(path: string, title: string): Routes[number] {
-  return { path, component: PlaceholderComponent, data: { title }, title: `${title} · Elementar RT` };
-}
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'dashboard/getting-started' },
@@ -177,9 +171,7 @@ export const routes: Routes = [
       {
         path: 'content',
         loadChildren: () => import('./gallery/gallery.routes').then((m) => m.contentRoutes)
-      },
-      // Temporary: shared-kit verification page (removed in the hardening phase).
-      { path: 'dev-kit', loadComponent: () => import('./shared/dev-kit/dev-kit').then((m) => m.DevKitComponent), title: 'Dev Kit · Elementar RT' }
+      }
     ]
   },
 
