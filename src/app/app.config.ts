@@ -1,5 +1,7 @@
 import {
   ApplicationConfig,
+  inject,
+  provideAppInitializer,
   provideBrowserGlobalErrorListeners,
   provideZoneChangeDetection,
   isDevMode,
@@ -10,9 +12,21 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
-import { ColorSchemeStore } from '@elementar-rt/components/color-scheme';
+import { COLOR_SCHEME_LOCAL_KEY, ColorSchemeStore } from '@elementar-rt/components/color-scheme';
 
 import { routes } from './app.routes';
+
+/**
+ * `ColorSchemeStore` persists the scheme on change but always boots to 'light',
+ * so the saved preference has to be replayed at startup — otherwise every reload
+ * flips a dark-mode user back to light.
+ */
+function restoreColorScheme(): void {
+  const saved = localStorage.getItem(COLOR_SCHEME_LOCAL_KEY);
+  if (saved === 'dark' || saved === 'light') {
+    inject(ColorSchemeStore).setScheme(saved);
+  }
+}
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -28,6 +42,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     provideNativeDateAdapter(),
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
-    ColorSchemeStore
+    ColorSchemeStore,
+    provideAppInitializer(restoreColorScheme)
   ]
 };

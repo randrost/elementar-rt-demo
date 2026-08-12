@@ -13,30 +13,17 @@ export const routes: Routes = [
   // ---- Outside shell ----
   {
     path: 'auth',
-    children: [
-      { path: '', pathMatch: 'full', redirectTo: 'sign-in' },
-      leaf('sign-in', 'Sign In'),
-      leaf('sign-up', 'Sign Up'),
-      leaf('forgot-password', 'Forgot Password'),
-      leaf('password-reset', 'Password Reset'),
-      leaf('set-new-password', 'Set New Password'),
-      leaf('create-account', 'Create Account'),
-      leaf('done', 'Done')
-    ]
+    loadChildren: () => import('./auth/auth.routes').then((m) => m.authRoutes)
   },
   {
     path: 'error',
-    children: [
-      leaf('not-found', 'Not Found'),
-      leaf('not-found-2', 'Not Found'),
-      leaf('server-error', 'Server Error'),
-      leaf('server-error-2', 'Server Error'),
-      leaf('forbidden', 'Forbidden'),
-      leaf('forbidden-2', 'Forbidden'),
-      leaf('maintenance', 'Maintenance')
-    ]
+    loadChildren: () => import('./error/error.routes').then((m) => m.errorRoutes)
   },
-  leaf('onboarding', 'Onboarding'),
+  {
+    path: 'onboarding',
+    loadComponent: () => import('./onboarding/onboarding').then((m) => m.OnboardingComponent),
+    title: 'Get Started · Elementar RT'
+  },
 
   // ---- Inside shell ----
   {
