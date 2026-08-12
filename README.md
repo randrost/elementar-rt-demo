@@ -59,9 +59,14 @@ Other scripts:
 ```bash
 npm run build        # production build into dist/
 npm run build:prod   # explicit production configuration
-npm test             # unit tests (Karma + Jasmine)
+npm test             # unit tests (Karma + Jasmine, watch mode)
+npm run test:ci      # unit tests once, headless
 npm run e2e          # end-to-end and accessibility tests (Playwright)
+npm run e2e:ui       # the same, in Playwright's UI mode
 ```
+
+The E2E suite starts its own dev server on port 4300, so it never picks up
+whatever you have running on 4200.
 
 Node 20 or newer.
 
@@ -116,10 +121,10 @@ from the route, not two implementations to keep in sync.
 
 ## Accessibility
 
-Audited with axe-core across 40+ routes in both colour schemes, with zero
-violations at the time of writing. That covers landmarks, heading order, form
-labelling, and contrast — the tool cannot judge whether the reading order makes
-sense, so treat it as a floor rather than a guarantee.
+Audited with axe-core (WCAG 2.0/2.1 A and AA) across 38 routes in both colour
+schemes, with zero violations at the time of writing. That covers landmarks,
+heading order, form labelling, and contrast — the tool cannot judge whether the
+reading order makes sense, so treat it as a floor rather than a guarantee.
 
 Keyboard focus is visible everywhere via a `:focus-visible` ring, and scrollable
 regions are reachable by keyboard.

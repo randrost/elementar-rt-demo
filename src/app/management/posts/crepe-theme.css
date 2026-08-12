@@ -1,0 +1,7 @@
+/* Milkdown Crepe's theme.
+   These stylesheets @import bare node_modules specifiers (@milkdown/kit, katex),
+   so they must be bundled — copying them as static assets leaves those imports
+   pointing at nothing. Living here rather than in the global sheet means they
+   land in this component's lazy chunk, so only the posts editor pays for them. */
+@import '@milkdown/crepe/theme/common/style.css';
+@import '@milkdown/crepe/theme/frame.css';

@@ -97,9 +97,9 @@ const TONE_CLASSES: Record<string, string> = {
 
           <!-- Callout -->
           <section class="rounded-2xl border border-primary bg-primary-container p-5 text-on-primary-container">
-            <p class="text-xs uppercase tracking-wide opacity-70">Callout</p>
+            <p class="text-xs uppercase tracking-wide opacity-90">Callout</p>
             <h2 class="mt-2 text-base font-semibold">You are on the Team plan</h2>
-            <p class="mt-1.5 text-sm opacity-90">
+            <p class="mt-1.5 text-sm">
               Business adds SSO, audit log export, and an uptime SLA.
             </p>
             <button matButton="filled" type="button" class="!mt-4">Compare plans</button>

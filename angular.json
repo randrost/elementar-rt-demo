@@ -49,11 +49,6 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              },
-              {
-                "glob": "**/*.css",
-                "input": "node_modules/@milkdown/crepe/lib/theme",
-                "output": "crepe-theme"
               }
             ],
             "styles": [
@@ -73,8 +68,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "8kB",
-                  "maximumError": "16kB"
+                  "maximumWarning": "90kB",
+                  "maximumError": "120kB"
                 }
               ],
               "outputHashing": "all"

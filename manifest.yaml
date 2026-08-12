@@ -1,0 +1,91 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: elementar-rt-admin
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elementar-rt-admin
+  namespace: elementar-rt-admin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elementar-rt-admin
+  template:
+    metadata:
+      labels:
+        app: elementar-rt-admin
+    spec:
+      containers:
+        - name: elementar-rt-admin
+          image: registry.r-tulika.me/elementar-rt-admin:latest
+          ports:
+            - containerPort: 80
+          readinessProbe:
+            httpGet:
+              path: /index.html
+              port: 80
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /index.html
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 30
+          resources:
+            requests:
+              cpu: 25m
+              memory: 64Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
+      imagePullSecrets:
+        - name: regcred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: elementar-rt-admin
+  namespace: elementar-rt-admin
+spec:
+  selector:
+    app: elementar-rt-admin
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: elementar-rt-admin
+  namespace: elementar-rt-admin
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/proxy-cache-key: "$scheme$request_method$host$request_uri"
+    nginx.ingress.kubernetes.io/proxy-cache-use-stale: "error timeout updating http_500 http_502 http_503 http_504"
+    nginx.ingress.kubernetes.io/proxy-cache-revalidate: "on"
+    nginx.ingress.kubernetes.io/proxy-cache-bypass: "$http_cache_control"
+    nginx.ingress.kubernetes.io/proxy-cache: "true"
+    nginx.ingress.kubernetes.io/proxy-cache-valid: "200 302 10m"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - admin.elementar-rt.r-tulika.me
+      secretName: elementar-rt-admin-tls
+  rules:
+    - host: admin.elementar-rt.r-tulika.me
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: elementar-rt-admin
+                port:
+                  number: 80

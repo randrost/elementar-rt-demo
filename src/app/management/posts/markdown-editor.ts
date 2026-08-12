@@ -18,29 +18,16 @@ import {
  * dynamically — it only downloads when this editor renders, which keeps it out
  * of the posts-list chunk.
  *
- * Its ~85 kB of CSS is copied to `crepe-theme/` as a build asset and linked on
- * first use. Component styles would have pulled it into the eager budget, and
- * the global sheet would have shipped it to every visitor who never opens the
- * editor.
+ * Its ~85 kB of CSS lives in this component's styles, which puts it in the same
+ * lazy chunk. The global sheet would have shipped it to every visitor who never
+ * opens the editor.
  */
-const THEME_HREFS = ['crepe-theme/common/style.css', 'crepe-theme/frame/style.css'];
-
-/** Appends Crepe's stylesheets once, however many editors mount. */
-function ensureCrepeTheme(): void {
-  for (const href of THEME_HREFS) {
-    if (document.head.querySelector(`link[href="${href}"]`)) continue;
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = href;
-    document.head.appendChild(link);
-  }
-}
-
 @Component({
   selector: 'app-markdown-editor',
   changeDetection: ChangeDetectionStrategy.OnPush,
   // Crepe styles its own DOM; scoping would not reach it.
   encapsulation: ViewEncapsulation.None,
+  styleUrl: './crepe-theme.css',
   styles: `
     app-markdown-editor {
       display: block;
@@ -72,7 +59,6 @@ export class MarkdownEditorComponent {
   }
 
   private async boot(): Promise<void> {
-    ensureCrepeTheme();
     const { Crepe } = await import('@milkdown/crepe');
 
     const crepe = new Crepe({
