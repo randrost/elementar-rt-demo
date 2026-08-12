@@ -37,7 +37,12 @@ export const routes: Routes = [
       {
         path: 'applications',
         children: [
-          leaf('calendar', 'Calendar'),
+          {
+            path: 'calendar',
+            loadComponent: () => import('./applications/calendar/calendar').then((m) => m.CalendarComponent),
+            data: { title: 'Calendar' },
+            title: 'Calendar · Elementar RT'
+          },
           {
             path: 'messenger',
             loadComponent: () => import('./applications/messenger/messenger').then((m) => m.MessengerComponent),
@@ -51,7 +56,13 @@ export const routes: Routes = [
             data: { title: 'File Manager' },
             title: 'File Manager · Elementar RT'
           },
-          leaf('content-editor', 'Content Editor'),
+          {
+            path: 'content-editor',
+            loadComponent: () =>
+              import('./applications/content-editor/content-editor').then((m) => m.ContentEditorComponent),
+            data: { title: 'Content Editor' },
+            title: 'Content Editor · Elementar RT'
+          },
           {
             path: 'kanban',
             loadComponent: () => import('./applications/kanban/kanban').then((m) => m.KanbanComponent),
@@ -98,31 +109,7 @@ export const routes: Routes = [
       },
       {
         path: 'management',
-        children: [
-          {
-            path: 'posts',
-            children: [
-              { path: '', pathMatch: 'full', redirectTo: 'list' },
-              leaf('list', 'All Posts'),
-              leaf('new', 'New Post'),
-              leaf('details/:id', 'Post Details'),
-              leaf('edit/:id', 'Edit Post'),
-              leaf('categories', 'Categories'),
-              leaf('topics', 'Topics')
-            ]
-          },
-          {
-            path: 'settings',
-            children: [
-              { path: '', pathMatch: 'full', redirectTo: 'general' },
-              leaf('general', 'General Settings'),
-              leaf('writing', 'Writing Settings'),
-              leaf('reading', 'Reading Settings'),
-              leaf('discussion', 'Discussion Settings'),
-              leaf('media', 'Media Settings')
-            ]
-          }
-        ]
+        loadChildren: () => import('./management/management.routes').then((m) => m.managementRoutes)
       },
       {
         path: 'account',
