@@ -49,12 +49,18 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*.css",
+                "input": "node_modules/@milkdown/crepe/lib/theme",
+                "output": "crepe-theme"
               }
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/@milkdown/crepe/lib/theme/common/style.css",
-              "node_modules/@milkdown/crepe/lib/theme/frame/style.css"
+              "src/styles.scss"
+            ],
+            "allowedCommonJsDependencies": [
+              "extend"
             ]
           },
           "configurations": {
@@ -62,8 +68,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "1.5MB",
-                  "maximumError": "3MB"
+                  "maximumWarning": "1.35MB",
+                  "maximumError": "1.6MB"
                 },
                 {
                   "type": "anyComponentStyle",
