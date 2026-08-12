@@ -157,13 +157,7 @@ export const routes: Routes = [
       },
       {
         path: 'widgets',
-        children: [
-          { path: '', pathMatch: 'full', redirectTo: 'general' },
-          leaf('general', 'General Widgets'),
-          leaf('crypto', 'Crypto Widgets'),
-          leaf('finance', 'Finance Widgets'),
-          leaf('analytics', 'Analytics Widgets')
-        ]
+        loadChildren: () => import('./widgets/widgets.routes').then((m) => m.widgetsRoutes)
       },
       {
         path: 'cards',
