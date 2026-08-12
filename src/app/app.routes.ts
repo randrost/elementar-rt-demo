@@ -38,7 +38,12 @@ export const routes: Routes = [
         path: 'applications',
         children: [
           leaf('calendar', 'Calendar'),
-          leaf('messenger', 'Messenger'),
+          {
+            path: 'messenger',
+            loadComponent: () => import('./applications/messenger/messenger').then((m) => m.MessengerComponent),
+            data: { title: 'Messenger' },
+            title: 'Messenger · Elementar RT'
+          },
           {
             path: 'file-manager',
             loadComponent: () =>
@@ -87,12 +92,7 @@ export const routes: Routes = [
           },
           {
             path: 'courses',
-            children: [
-              { path: '', pathMatch: 'full', redirectTo: 'list' },
-              leaf('list', 'Courses'),
-              leaf('details/:id', 'Course Details'),
-              leaf('builder/:id', 'Course Builder')
-            ]
+            loadChildren: () => import('./applications/courses/courses.routes').then((m) => m.coursesRoutes)
           }
         ]
       },
