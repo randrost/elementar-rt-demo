@@ -87,22 +87,26 @@ import { Contact, ContactsService } from './mock-data';
         <!-- Detail pane -->
         @if (selected(); as contact) {
           <div class="flex w-full flex-col overflow-y-auto rounded-2xl border border-outline-variant bg-surface">
-            <div class="relative h-28 shrink-0 bg-primary-container"></div>
+            <!-- Not position:relative — a positioned banner paints above the
+                 static avatar below it and clips its top half off. The top
+                 rounding keeps its square corners inside the card border. -->
+            <div class="h-28 shrink-0 rounded-t-2xl bg-primary-container"></div>
 
             <div class="px-6 pb-6">
-              <div class="-mt-10 flex flex-wrap items-end justify-between gap-4">
-                <div class="flex items-end gap-4">
-                  <img
-                    [src]="avatar(contact.avatarSeed)"
-                    alt=""
-                    class="size-20 rounded-full border-4 border-surface bg-surface-container" />
-                  <div class="pb-1">
-                    <h2 class="text-xl font-semibold text-on-surface">{{ contact.name }}</h2>
-                    <p class="text-sm text-on-surface-variant">{{ contact.role }} · {{ contact.company }}</p>
-                  </div>
+              <!-- Only the avatar overlaps the banner. Pulling the whole row up
+                   put the name and actions on top of the tint once they wrapped. -->
+              <img
+                [src]="avatar(contact.avatarSeed)"
+                alt=""
+                class="relative -mt-10 block size-20 rounded-full border-4 border-surface bg-surface-container" />
+
+              <div class="mt-4 flex flex-wrap items-start justify-between gap-4">
+                <div class="min-w-0">
+                  <h2 class="text-xl font-semibold text-on-surface">{{ contact.name }}</h2>
+                  <p class="text-sm text-on-surface-variant">{{ contact.role }} · {{ contact.company }}</p>
                 </div>
 
-                <div class="flex items-center gap-2 pb-1">
+                <div class="flex items-center gap-2">
                   <button
                     matIconButton
                     type="button"
