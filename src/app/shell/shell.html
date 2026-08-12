@@ -8,7 +8,11 @@
       <iconify-icon icon="solar:confetti-bold-duotone" width="18" height="18"></iconify-icon>
       <span>{{ a?.message }}</span>
       @if (a?.link) {
-        <a [href]="a?.link" class="font-semibold underline underline-offset-2">{{ a?.linkLabel }}</a>
+        <a
+          [href]="a?.link"
+          target="_blank"
+          rel="noopener"
+          class="font-semibold underline underline-offset-2">{{ a?.linkLabel }}</a>
       }
       <button class="ml-2 opacity-80 hover:opacity-100" (click)="store.dismissAnnouncement()" aria-label="Dismiss announcement">
         <iconify-icon icon="solar:close-circle-linear" width="18" height="18"></iconify-icon>
