@@ -41,19 +41,29 @@ export const routes: Routes = [
           leaf('messenger', 'Messenger'),
           leaf('file-manager', 'File Manager'),
           leaf('content-editor', 'Content Editor'),
-          leaf('kanban', 'Kanban'),
-          leaf('notes', 'Notes'),
-          leaf('contacts', 'Contacts'),
+          {
+            path: 'kanban',
+            loadComponent: () => import('./applications/kanban/kanban').then((m) => m.KanbanComponent),
+            data: { title: 'Kanban' },
+            title: 'Kanban · Elementar RT'
+          },
+          {
+            path: 'notes',
+            loadComponent: () => import('./applications/notes/notes').then((m) => m.NotesComponent),
+            data: { title: 'Notes' },
+            title: 'Notes · Elementar RT'
+          },
+          {
+            path: 'contacts',
+            loadComponent: () => import('./applications/contacts/contacts').then((m) => m.ContactsComponent),
+            data: { title: 'Contacts' },
+            title: 'Contacts · Elementar RT'
+          },
           leaf('ai-studio', 'AI Studio'),
           {
             path: 'help-center',
-            children: [
-              { path: '', pathMatch: 'full', redirectTo: 'home' },
-              leaf('home', 'Help Center'),
-              leaf('faq', 'FAQ'),
-              leaf('guides', 'Guides'),
-              leaf('support', 'Support')
-            ]
+            loadChildren: () =>
+              import('./applications/help-center/help-center.routes').then((m) => m.helpCenterRoutes)
           },
           {
             path: 'invoice',
@@ -77,7 +87,12 @@ export const routes: Routes = [
               leaf('label/:label', 'Label')
             ]
           },
-          leaf('projects', 'Projects'),
+          {
+            path: 'projects',
+            loadComponent: () => import('./applications/projects/projects').then((m) => m.ProjectsComponent),
+            data: { title: 'Projects' },
+            title: 'Projects · Elementar RT'
+          },
           {
             path: 'courses',
             children: [
