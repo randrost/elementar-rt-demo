@@ -86,6 +86,33 @@ test.describe('shell', () => {
   });
 });
 
+test.describe('header', () => {
+  test('shows exactly one functional burger button', async ({ page }) => {
+    const isMobile = test.info().project.name === 'mobile';
+    await page.goto('/dashboard/getting-started');
+
+    const compactToggle = page.getByRole('button', { name: 'Toggle sidebar' });
+    const drawerOpen = page.getByRole('button', { name: 'Open menu' });
+
+    if (isMobile) {
+      await expect(drawerOpen).toBeVisible();
+      await expect(compactToggle).toBeHidden();
+
+      await drawerOpen.click();
+      const drawer = page.getByRole('complementary', { name: 'Sidebar' }).filter({ visible: true });
+      await expect(drawer).toHaveCount(1);
+    } else {
+      await expect(compactToggle).toBeVisible();
+      await expect(drawerOpen).toBeHidden();
+
+      const sidebar = page.locator('app-sidebar > div').first();
+      const widthBefore = (await sidebar.boundingBox())?.width;
+      await compactToggle.click();
+      await expect.poll(async () => (await sidebar.boundingBox())?.width).not.toBe(widthBefore);
+    }
+  });
+});
+
 test.describe('pages outside the shell', () => {
   for (const route of STANDALONE_ROUTES) {
     test(`${route} has no app sidebar`, async ({ page }) => {

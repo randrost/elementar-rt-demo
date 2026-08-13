@@ -1,11 +1,18 @@
 <div class="flex h-16 items-center gap-2 px-3 sm:px-4">
-  <!-- Sidebar toggle (desktop: compact; mobile: open drawer) -->
-  <button matIconButton class="hidden lg:inline-flex" (click)="store.toggleSidebarCompact()" matTooltip="Toggle sidebar" aria-label="Toggle sidebar">
-    <iconify-icon icon="solar:hamburger-menu-linear" width="22" height="22"></iconify-icon>
-  </button>
-  <button matIconButton class="inline-flex lg:hidden" (click)="store.setMobileSidebarOpen(true)" aria-label="Open menu">
-    <iconify-icon icon="solar:hamburger-menu-linear" width="22" height="22"></iconify-icon>
-  </button>
+  <!-- Sidebar toggle (desktop: compact; mobile: open drawer).
+       Material injects unlayered `display` rules on its button hosts, which
+       beat Tailwind's layered responsive utilities, so the visibility classes
+       live on plain span wrappers instead. -->
+  <span class="hidden lg:inline-flex">
+    <button matIconButton (click)="store.toggleSidebarCompact()" matTooltip="Toggle sidebar" aria-label="Toggle sidebar">
+      <iconify-icon icon="solar:hamburger-menu-linear" width="22" height="22"></iconify-icon>
+    </button>
+  </span>
+  <span class="inline-flex lg:hidden">
+    <button matIconButton (click)="store.setMobileSidebarOpen(true)" aria-label="Open menu">
+      <iconify-icon icon="solar:hamburger-menu-linear" width="22" height="22"></iconify-icon>
+    </button>
+  </span>
 
   <!-- Breadcrumbs -->
   <nav class="hidden min-w-0 items-center gap-1.5 text-sm sm:flex" aria-label="Breadcrumb">
