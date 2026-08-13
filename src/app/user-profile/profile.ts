@@ -241,7 +241,7 @@ export class UserProfileComponent {
   protected readonly details = [
     { label: 'Email', value: 'rostik.tulika@gmail.com', icon: 'solar:letter-bold-duotone' },
     { label: 'Location', value: 'London, UK', icon: 'solar:map-point-bold-duotone' },
-    { label: 'Website', value: 'elementar-rt.dev', icon: 'solar:global-bold-duotone' },
+    { label: 'Website', value: 'elementar-rt.r-tulika.me', icon: 'solar:global-bold-duotone' },
     { label: 'Joined', value: 'March 2024', icon: 'solar:calendar-bold-duotone' }
   ];
 

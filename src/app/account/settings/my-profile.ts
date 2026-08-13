@@ -97,7 +97,7 @@ export class MyProfileComponent {
     email: 'rostik.tulika@gmail.com',
     phone: '+44 20 7946 0123',
     location: 'London, UK',
-    website: 'https://elementar-rt.dev',
+    website: 'https://elementar-rt.r-tulika.me',
     bio: 'Building an open-source admin template, one phase at a time.'
   };
 
