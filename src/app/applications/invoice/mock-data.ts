@@ -41,7 +41,7 @@ export const INVOICE_STATUS: Record<InvoiceStatus, { label: string; tone: Status
 
 export const ISSUER: InvoiceParty = {
   name: 'Elementar RT',
-  email: 'billing@elementar-rt.dev',
+  email: 'billing@elementar-rt.r-tulika.me',
   avatarSeed: 'elementar-rt',
   address: ['12 Token Street', 'London EC2A 4NE', 'United Kingdom']
 };

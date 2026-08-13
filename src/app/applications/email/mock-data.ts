@@ -47,8 +47,8 @@ const PEOPLE: readonly MailParty[] = [
   { name: 'Radia Perlman', email: 'radia@spanningtree.net', avatarSeed: 'radia-perlman' },
   { name: 'Barbara Liskov', email: 'barbara@substitution.io', avatarSeed: 'barbara-liskov' },
   { name: 'Anita Borg', email: 'anita@systers.org', avatarSeed: 'anita-borg' },
-  { name: 'Billing', email: 'billing@elementar-rt.dev', avatarSeed: 'billing-bot' },
-  { name: 'Status', email: 'status@elementar-rt.dev', avatarSeed: 'status-bot' }
+  { name: 'Billing', email: 'billing@elementar-rt.r-tulika.me', avatarSeed: 'billing-bot' },
+  { name: 'Status', email: 'status@elementar-rt.r-tulika.me', avatarSeed: 'status-bot' }
 ];
 
 const THREADS: readonly { subject: string; body: string; labels: string[] }[] = [
