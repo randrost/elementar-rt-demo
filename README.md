@@ -156,4 +156,4 @@ paths — without that, a refresh on any deep link would 404.
 
 MIT — see [LICENSE](LICENSE). Use it, fork it, ship it.
 
-Built by [Rostyslav Tulika](https://r-tulika.me).
+Built by [Rostyslav Tulika](https://tulikas.de).

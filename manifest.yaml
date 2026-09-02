@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: elementar-rt-admin
-          image: registry.r-tulika.me/elementar-rt-admin:latest
+          image: registry.tulikas.de/elementar-rt-admin:latest
           ports:
             - containerPort: 80
           readinessProbe:
@@ -76,10 +76,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - admin.elementar-rt.r-tulika.me
+        - admin.elementar-rt.tulikas.de
       secretName: elementar-rt-admin-tls
   rules:
-    - host: admin.elementar-rt.r-tulika.me
+    - host: admin.elementar-rt.tulikas.de
       http:
         paths:
           - path: /
