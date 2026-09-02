@@ -174,8 +174,8 @@ export const SETTINGS_GROUPS: Record<SettingsArea, SettingsAreaMeta> = {
 const DEFAULTS: Record<string, string | boolean> = {
   siteTitle: 'Elementar RT',
   tagline: 'Admin experiences, faster',
-  siteUrl: 'https://elementar-rt.r-tulika.me',
-  adminEmail: 'admin@elementar-rt.r-tulika.me',
+  siteUrl: 'https://elementar-rt.tulikas.de',
+  adminEmail: 'admin@elementar-rt.tulikas.de',
   language: 'English (UK)',
   timezone: 'Europe/London',
   dateFormat: 'D MMMM YYYY',
@@ -190,7 +190,7 @@ const DEFAULTS: Record<string, string | boolean> = {
   revisions: true,
   revisionLimit: '25',
   markdownShortcuts: true,
-  mailServer: 'mail.elementar-rt.r-tulika.me',
+  mailServer: 'mail.elementar-rt.tulikas.de',
   mailPort: '587',
 
   homepageShows: 'Latest posts',
