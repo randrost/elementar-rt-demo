@@ -4,7 +4,7 @@ An open-source Angular 20 admin template. Every screen is built, not stubbed —
 seven dashboards, sixteen application areas, a twelve-widget catalog, and the
 settings, account, and UI-gallery pages an admin product actually needs.
 
-**[Live demo](https://admin.elementar-rt.r-tulika.me)** · MIT licensed
+**[Live demo](https://admin.elementar-rt.tulikas.de)** · MIT licensed
 
 ---
 
@@ -20,7 +20,7 @@ specification written before the code. If the two disagree, the spec wins.
 
 ### What it is not
 
-Not a component library — it consumes [`@elementar-rt/components`](https://elementar-rt.r-tulika.me)
+Not a component library — it consumes [`@elementar-rt/components`](https://elementar-rt.tulikas.de)
 rather than defining one. Not production-hardened: there is no auth, no
 persistence beyond `localStorage`, and the data resets on reload.
 
