@@ -143,8 +143,9 @@ docker build -t elementar-rt-admin .
 docker run -p 8080:80 elementar-rt-admin
 ```
 
-`manifest.yaml` deploys it to Kubernetes behind an nginx ingress with
-cert-manager TLS, and `Jenkinsfile` builds and pushes the image on every push to
+The Kubernetes manifest (nginx ingress, cert-manager TLS) lives in
+[`tls-infra`](https://github.com/randrost/tls-infra) (private), not in this
+repo — `Jenkinsfile` builds, pushes, and deploys from there on every push to
 the default branch.
 
 Because it is a SPA, the nginx config falls back to `index.html` for unknown
