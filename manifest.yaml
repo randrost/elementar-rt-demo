@@ -1,16 +1,24 @@
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: elementar-rt-admin
+# Namespace `elementar-rt` is pre-existing and shared with the separate
+# `elementar-rt` component-library app -- not declared here, so this
+# manifest never claims ownership of a namespace it doesn't fully own.
+#
+# Two Ingress objects, not one: this app is reachable on both the legacy
+# r-tulika.me domain and the current tulikas.de one, each with its own TLS
+# secret. Reconstructed 2026-09-24 from the live cluster state after
+# discovering the previous version of this file declared a namespace that
+# didn't exist (elementar-rt-admin) and was missing the tulikas.de Ingress
+# entirely -- it had never actually been applied; the live objects were set
+# up directly via Rancher's UI. See randrost/tls-infra README for the
+# --reuse-values incident that prompted checking this file against reality
+# instead of trusting it.
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: elementar-rt-admin
-  namespace: elementar-rt-admin
+  namespace: elementar-rt
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: elementar-rt-admin
@@ -50,7 +58,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: elementar-rt-admin
-  namespace: elementar-rt-admin
+  namespace: elementar-rt
 spec:
   selector:
     app: elementar-rt-admin
@@ -63,7 +71,38 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: elementar-rt-admin
-  namespace: elementar-rt-admin
+  namespace: elementar-rt
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/proxy-cache-key: "$scheme$request_method$host$request_uri"
+    nginx.ingress.kubernetes.io/proxy-cache-use-stale: "error timeout updating http_500 http_502 http_503 http_504"
+    nginx.ingress.kubernetes.io/proxy-cache-revalidate: "on"
+    nginx.ingress.kubernetes.io/proxy-cache-bypass: "$http_cache_control"
+    nginx.ingress.kubernetes.io/proxy-cache: "true"
+    nginx.ingress.kubernetes.io/proxy-cache-valid: "200 302 10m"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - admin.elementar-rt.r-tulika.me
+      secretName: elementar-rt-admin-tls
+  rules:
+    - host: admin.elementar-rt.r-tulika.me
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: elementar-rt-admin
+                port:
+                  number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: elementar-rt-admin-tulikas
+  namespace: elementar-rt
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
     nginx.ingress.kubernetes.io/proxy-cache-key: "$scheme$request_method$host$request_uri"
@@ -77,7 +116,7 @@ spec:
   tls:
     - hosts:
         - admin.elementar-rt.tulikas.de
-      secretName: elementar-rt-admin-tls
+      secretName: elementar-rt-admin-tulikas-tls
   rules:
     - host: admin.elementar-rt.tulikas.de
       http:
